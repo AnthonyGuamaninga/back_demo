@@ -42,7 +42,7 @@ public class SongController {
 
 	// GET
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SongTO> findById(@PathVariable Integer id) {
+	public ResponseEntity<SongTO> findById(@PathVariable("id") Integer id) {
 		return ResponseEntity.status(HttpStatus.OK).body(this.songService.findById(id));
 	}
 
@@ -53,14 +53,14 @@ public class SongController {
 
 	// PUT
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SongTO> put(@RequestBody SongTO song, @PathVariable Integer id) {
+	public ResponseEntity<SongTO> put(@RequestBody SongTO song, @PathVariable("id") Integer id) {
 
 		return ResponseEntity.status(HttpStatus.OK).body(this.songService.put(id, song));
 	}
 
 	// DELETE
 	@DeleteMapping(path = "/{id}")
-	public void delete(@PathVariable Integer id) {
+	public void delete(@PathVariable("id") Integer id) {
 		this.songService.delete(id);
 	}
     

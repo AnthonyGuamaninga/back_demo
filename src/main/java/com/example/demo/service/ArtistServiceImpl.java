@@ -1,10 +1,11 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.IArtistRepository;
-import com.example.demo.service.to.ArtistTO;
 import com.example.demo.service.to.ArtistTO;
 
 @Service
@@ -29,6 +30,17 @@ public class ArtistServiceImpl implements IArtistService {
             return this.artistRepository.findById(id).toTO();
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override
+    public List<ArtistTO> findAll() {
+        try {
+            return this.artistRepository.findAll().stream()
+                    .map(artist -> artist.toTO())
+                    .toList();
+        } catch (Exception e) {
+            return List.of();
         }
     }
 

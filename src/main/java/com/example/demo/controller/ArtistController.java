@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,18 +40,23 @@ public class ArtistController {
 
 	// GET
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArtistTO> findById(@PathVariable Integer id) {
+	public ResponseEntity<ArtistTO> findById(@PathVariable("id") Integer id) {
 		return ResponseEntity.status(HttpStatus.OK).body(this.artistService.findById(id));
 	}
 
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ArtistTO>> findAll() {
+		return ResponseEntity.status(HttpStatus.OK).body(this.artistService.findAll());
+	}
+
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArtistTO> put(@RequestBody ArtistTO artist, @PathVariable Integer id) {
+	public ResponseEntity<ArtistTO> put(@RequestBody ArtistTO artist, @PathVariable("id") Integer id) {
 		return ResponseEntity.status(HttpStatus.OK).body(this.artistService.put(id, artist));
 	}
 
 	// DELETE
 	@DeleteMapping(path = "/{id}")
-	public void delete(@PathVariable Integer id) {
+	public void delete(@PathVariable("id") Integer id) {
 		this.artistService.delete(id);
 	}
     
