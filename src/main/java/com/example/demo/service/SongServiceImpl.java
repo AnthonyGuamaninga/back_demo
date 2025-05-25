@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,17 @@ public class SongServiceImpl implements ISongService {
             return this.songRepository.findById(id).toTO();
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override
+    public List<SongTO> findAll() {
+        try {
+            return this.songRepository.findAll().stream()
+                    .map(song -> song.toTO())
+                    .toList();
+        } catch (Exception e) {
+            return List.of();
         }
     }
 

@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.repository.model.Song;
@@ -34,6 +36,16 @@ public class SongRepositoryImpl implements ISongRepository {
         } catch (Exception e) {
             System.out.println("Error finding song by ID: " + e.getMessage());
             return null;
+        }
+    }
+
+    @Override
+    public List<Song> findAll() {
+        try {
+            return entityManager.createQuery("SELECT s FROM Song s", Song.class).getResultList();
+        } catch (Exception e) {
+            System.out.println("Error finding all songs: " + e.getMessage());
+            return List.of();
         }
     }
 

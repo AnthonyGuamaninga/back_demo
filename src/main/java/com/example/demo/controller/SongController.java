@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,6 +44,11 @@ public class SongController {
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SongTO> findById(@PathVariable Integer id) {
 		return ResponseEntity.status(HttpStatus.OK).body(this.songService.findById(id));
+	}
+
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<SongTO>> findAll() {
+		return ResponseEntity.status(HttpStatus.OK).body(this.songService.findAll());
 	}
 
 	// PUT
