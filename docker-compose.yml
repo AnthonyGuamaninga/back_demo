@@ -21,6 +21,16 @@ services:
     volumes:
 
       - pgdata:/var/lib/postgresql/data
+
+  springboot-app:
+    image: aaguamaninga/backend-music:latest
+    ports:
+      - "9090:8080"
+    container_name: backend-springboot-container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/musicdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
  
 volumes:
 
